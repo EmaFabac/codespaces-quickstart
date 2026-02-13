@@ -1,0 +1,97 @@
+version: "3.1"
+nlu:
+  - intent: ask_id_info
+    examples: |
+      - Što je IDA?
+      - Čime se bavi IDA?
+      - Koja je uloga IDA-e?
+      - Čime se bavi Istarska razvojna agencija?
+      - Što radi IDA?
+
+  - intent: ask_contact
+    examples: |
+      - Koji je kontakt?
+      - Koji je broj telefona od IDA-e?
+      - Kontakt telefon IDA
+      - Koji je kontakt broj IDA?
+      - Trebam broj telefona IDA-e
+      - Kako mogu nazvati IDA?
+      - Daj mi broj telefona od IDA-e
+      - IDA broj telefona
+      - Telefon od IDA u Puli
+      - Kontakt broj za IDA
+      - kontakt
+      - koji je email
+      - koja je e-mail adresa
+      - daj mi mail
+      - koji je kontakt email
+      - možete li mi dati email adresu
+      - kako vam mogu poslati upit mailom
+
+  - intent: ask_location
+    examples: |
+      - Gdje se nalazite?
+      - Koja je adresa?
+      - Kako doći do vas?
+      - gdje je ida
+      - lokacija ida pula
+      - u kojoj ste ulici
+
+  - intent: ask_kb
+    examples: |
+      - Koje je radno vrijeme?
+      - koje je radno vrijeme ida
+      - kada ste otvoreni
+      - radite li vikendom
+      - imate li edukacije
+      - imate li besplatne edukacije
+      - gdje mogu vidjeti edukacije
+      - kako se prijaviti na edukacije
+      - postoje li edukacije tijekom godine
+      - detalji o kreditnim linijama
+      - kreditne linije
+      - uvjeti kredita
+      - kolika je kamatna stopa
+      - kamatna stopa kredita
+      - koliki je rok otplate kredita
+      - rok otplate
+      - tko može biti korisnik kredita
+      - kome nije moguća dodjela kredita prema nkd 2007
+      - NKD 2007 djelatnosti koje ne mogu dobiti kredit
+      - koji je način isplate kredita
+      - isplata kredita
+      - koliki postotak kredita se može koristiti za obrtna sredstva
+      - obrtna sredstva postotak
+      - eu projekti u provedbi
+      - projekti u provedbi
+      - poduzetničke zone u istarskoj županiji
+      - poduzetničke zone istra
+      - informacije o poduzetničkim zonama
+      - potpore poduzetnicima
+      - mjere programa
+
+  - intent: ask_bank_criteria
+    examples: |
+      - koji su kriteriji za odabir banke
+      - kriteriji za odabir banke
+      - kako se bira banka u programu
+      - po kojim kriterijima se odabire banka
+      - kako se odabire banka
+      - odabir banke kriteriji
+  - intent: start_reservation
+    examples: |
+      - mogu li rezervirati prostor
+      - želim rezervirati prostor
+      - rezervacija prostora
+      - rezervirala bih prostor
+      - trebam rezervirati prostor
+      - želim rezervirati ured
+      - želim rezervirati konferencijsku salu
+      - rezervacija sale
+      - trebam salu
+      - trebam konferencijsku salu
+      - želim najam prostora
+      - zanima me najam prostora
+      - mogu li unajmiti prostor
+      - bookati prostor
+      - iznajmljivanje prostora

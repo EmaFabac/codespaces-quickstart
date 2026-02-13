@@ -1,0 +1,218 @@
+[
+  {
+    "id": "faq_001",
+    "category": "Uvod",
+    "question": "Uvod / dobrodošlica",
+    "answer": "EDIH ADRIA pitanja za ChatBotAI! Dobrodošli na internet stranicu Istarske razvojne agencije! IDA je prva regionalna razvojna agencija u Republici Hrvatskoj koja se bavi poticanjem poduzetništva u Istarskoj županiji te nudi sljedeće usluge:",
+    "keywords": "uvod, dobrodošlica",
+    "source": "",
+    "lang": "hr"
+  },
+  {
+    "id": "faq_002",
+    "category": "Besplatne edukacije za privatni i javni sektor",
+    "question": "Besplatne edukacije za privatni i javni sektor",
+    "answer": "Istarska razvojna agencija provodi besplatne edukacije za privatni i javni sektor tijekom cijele godine. U „Novostima“ na stranici www.ida.hr možete pronaći najavu na buduće edukacija/radionice/umrežavanja koja će se održati u Coworking centru Pula u narednom periodu. (Ne postoji kalendar s događanjima, niti imamo pisano pravilo koliko ih mora biti mjesečno ili godišnje.) Neke od radionica koje smo tijekom prošlih godina odradili online možete pronaći na poveznici https://www.ida.hr/hr/bn/edukacije/prijave/.",
+    "keywords": "besplatne, edukacije, privatni, javni, sektor",
+    "source": "https://www.ida.hr/hr/bn/edukacije/prijave/.",
+    "lang": "hr"
+  },
+  {
+    "id": "faq_003",
+    "category": "Besplatne edukacije za privatni i javni sektor",
+    "question": "Da li ja mogu održati predavanje u IDA-i?",
+    "answer": "Molim da na ida-uprava@ida.hr pošaljete prijedlog teme, opis teme i svoj CV te ćemo Vas naknadno kontaktirati.",
+    "keywords": "održati, predavanje, besplatne, edukacije, privatni, javni, sektor",
+    "source": "",
+    "lang": "hr"
+  },
+  {
+    "id": "faq_004",
+    "category": "Besplatne edukacije za privatni i javni sektor",
+    "question": "Da li su Vaša događanja besplatna?",
+    "answer": "Jesu, i namijenjena su obrtnicima, poduzetnicima, poduzetnicima početnicima, i zainteresiranim pojedincima koji žele postati poduzetnici.",
+    "keywords": "vaša, događanja, besplatna, besplatne, edukacije, privatni, javni, sektor",
+    "source": "",
+    "lang": "hr"
+  },
+  {
+    "id": "faq_005",
+    "category": "Kreditne linije za poduzetnike",
+    "question": "Kreditne linije za poduzetnike",
+    "answer": "Kreditna linija „Poduzetnik Istarska županija 2025“ provodi se u suradnji sa svim gradovima u Istarskoj županiji, Istarskom razvojnom agencijom – IDA d.o.o., Hrvatskom bankom za obnovu i razvitak i drugim poslovnim bankama s ciljem dodjele potpora male vrijednosti kroz subvenciju dijela kamata.",
+    "keywords": "kreditne, linije, poduzetnike",
+    "source": "",
+    "lang": "hr"
+  },
+  {
+    "id": "faq_006",
+    "category": "Kreditne linije za poduzetnike",
+    "question": "Koje su mjere programa?",
+    "answer": "Mjera 1: Krediti za malo i srednje poduzetništvo (nove investicije), Mjera 2: Krediti za poduzetništvo mladih, žena i početnika",
+    "keywords": "mjere, programa, kreditne, linije, poduzetnike",
+    "source": "",
+    "lang": "hr"
+  },
+  {
+    "id": "faq_007",
+    "category": "Kreditne linije za poduzetnike",
+    "question": "Tko može biti korisnik kredita?",
+    "answer": "Korisnici kredita mogu biti subjekti malog gospodarstva, koji su registrirani u Republici Hrvatskoj, u većinskom privatnom vlasništvu, koji ulažu na području Istarske županije i to: mala i srednja trgovačka društva, aktivni obrti, zadruge, slobodna zanimanja i profitne ustanove, uz uvjet da Odlukom Grada/Županije nije drugačije uređeno. Korisnici ne mogu biti trgovačka društva kojima je Istarska županija ili uključeni grad osnivač ili ima vlasnički udjel u temeljnom kapitalu.",
+    "keywords": "korisnik, kredita, kreditne, linije, poduzetnike",
+    "source": "",
+    "lang": "hr"
+  },
+  {
+    "id": "faq_008",
+    "category": "Kreditne linije za poduzetnike",
+    "question": "Koliko puta mogu koristiti kredit po ovom Programu?",
+    "answer": "Korisnik može koristiti kredit po ovom Kreditu samo jednom.",
+    "keywords": "koliko, puta, koristiti, kredit, ovom, programu, kreditne, linije, poduzetnike",
+    "source": "",
+    "lang": "hr"
+  },
+  {
+    "id": "faq_009",
+    "category": "Kreditne linije za poduzetnike",
+    "question": "Kome nije moguća dodjela kredita prema NKD 2007.?",
+    "answer": "područje A, odnosno za namjenu poljoprivreda, šumarstvo i ribarstvo područje K, financijske djelatnosti i djelatnosti osiguranja područje L, poslovanje nekretninama razred 77.34, iznajmljivanje i davanje u zakup (leasing) plovnih prijevoznih sredstava odjeljak 92, djelatnosti kockanja i klađenja razred 93.12, djelatnosti sportskih klubova",
+    "keywords": "kome, nije, moguća, dodjela, kredita, prema, 2007, kreditne, linije, poduzetnike",
+    "source": "",
+    "lang": "hr"
+  },
+  {
+    "id": "faq_010",
+    "category": "Kreditne linije za poduzetnike",
+    "question": "Koliko može biti iznos kredita za Mjeru 1: Krediti za malo i srednje poduzetništvo?",
+    "answer": "Iznos kredita za nove investicije može biti od 10.000,00 EUR do 400.000,00 EUR.",
+    "keywords": "koliko, iznos, kredita, mjeru, krediti, malo, srednje, poduzetništvo, kreditne, linije",
+    "source": "",
+    "lang": "hr"
+  },
+  {
+    "id": "faq_011",
+    "category": "Kreditne linije za poduzetnike",
+    "question": "Koliko je kamatna stopa?",
+    "answer": "Istarska županija i uključeni gradovi subvencionirati će kamatu na odobrene poduzetničke kredite za vrijeme korištenja, počeka i otplate kredita sa 1 postotnim poenom. Dodatnim postotnim poenom (ukupno 2%) sufinancirati će se investicije koje se odnose na sljedeće investicije: područje C: prerađivačka industrija (djelatnosti od 10.00 do 33.20) skupinu 62.0 Računalno programiranje, savjetovanje i djelatnosti povezane s njima te sve one projekte koji pridonose zelenoj tranziciji gospodarstva – dekarbonizaciji, OIE – obnovljivim izvorima energije i kružnom gospodarstvu.",
+    "keywords": "koliko, kamatna, stopa, kreditne, linije, poduzetnike",
+    "source": "",
+    "lang": "hr"
+  },
+  {
+    "id": "faq_012",
+    "category": "Kreditne linije za poduzetnike",
+    "question": "Koliki je rok otplate kredita?",
+    "answer": "Rok otplate kredita je 10 godina.",
+    "keywords": "koliki, otplate, kredita, kreditne, linije, poduzetnike",
+    "source": "",
+    "lang": "hr"
+  },
+  {
+    "id": "faq_013",
+    "category": "Kreditne linije za poduzetnike",
+    "question": "Koji je način isplate kredita?",
+    "answer": "Kredit za osnovna sredstva će poslovna banka doznačiti poduzetniku bezgotovinskom isplatom na poslovni račun dobavljača ili izvršitelja usluge za poduzetnika, temeljem pravovaljane dokumentacije.",
+    "keywords": "način, isplate, kredita, kreditne, linije, poduzetnike",
+    "source": "",
+    "lang": "hr"
+  },
+  {
+    "id": "faq_014",
+    "category": "Kreditne linije za poduzetnike",
+    "question": "Koliki postotak kredita se može koristiti za obrtna sredstva?",
+    "answer": "Do 30% iznosa kredita se može koristiti za obrtna sredstva.",
+    "keywords": "koliki, postotak, kredita, koristiti, obrtna, sredstva, kreditne, linije, poduzetnike",
+    "source": "",
+    "lang": "hr"
+  },
+  {
+    "id": "faq_015",
+    "category": "Kreditne linije za poduzetnike",
+    "question": "Koji su kriteriji za odabir banke?",
+    "answer": "Kriteriji su visina kamatne stopa za poduzetnika, visina naknade za obradu kreditnog zahtjeva, mreža poslovnica/ podružnica banke na području Istarske županije. https://www.ida.hr/hr/bn/poduzetnistvo/kreditiranje-i-jamstva/ https://www.ida.hr/hr/bn/poduzetnistvo/kreditiranje-i-jamstva/aktualne-kreditne-linije/ https://www.ida.hr/hr/bn/poduzetnistvo/kreditiranje-i-jamstva/provedene-kreditne-linije/",
+    "keywords": "kriteriji, odabir, izbor, birate, biranje, kako birate, po čemu birate, banka, banke, banku",
+    "source": "https://www.ida.hr/hr/bn/poduzetnistvo/kreditiranje-i-jamstva/; https://www.ida.hr/hr/bn/poduzetnistvo/kreditiranje-i-jamstva/aktualne-kreditne-linije/; https://www.ida.hr/hr/bn/poduzetnistvo/kreditiranje-i-jamstva/provedene-kreditne-linije/",
+    "lang": "hr"
+  },
+  {
+    "id": "faq_016",
+    "category": "Poduzetničke zone u Istarskoj županiji",
+    "question": "Poduzetničke zone u Istarskoj županiji",
+    "answer": "Na temelju postojeće prostorno-planske dokumentacije, infrastrukturne opremljenosti i raspoložive radne snage u okruženju, identificirano je 36 poduzetničkih zona sa statusom prioriteta, od čega je 18 infrastrukturno opremljenih sa 4.000 zaposlenih. Na taj način utvrđene, i u nastavku navedene strateške zone zauzimaju površinu veću od 1.200 ha.",
+    "keywords": "poduzetničke, zone, istarskoj, županiji",
+    "source": "",
+    "lang": "hr"
+  },
+  {
+    "id": "faq_017",
+    "category": "Poduzetničke zone u Istarskoj županiji",
+    "question": "Koliko poduzetničkih zona ima u Istarskoj županiji?",
+    "answer": "36",
+    "keywords": "koliko, poduzetničkih, zona, istarskoj, županiji, poduzetničke, zone",
+    "source": "",
+    "lang": "hr"
+  },
+  {
+    "id": "faq_018",
+    "category": "Poduzetničke zone u Istarskoj županiji",
+    "question": "Koliko ih je komunalno i infrastrukturno opremljeno?",
+    "answer": "18",
+    "keywords": "koliko, komunalno, infrastrukturno, opremljeno, poduzetničke, zone, istarskoj, županiji",
+    "source": "",
+    "lang": "hr"
+  },
+  {
+    "id": "faq_019",
+    "category": "Poduzetničke zone u Istarskoj županiji",
+    "question": "Gdje se nalaze poduzetničke zone u Istarskoj županiji?",
+    "answer": "Kartu poduzetničkih zona možete pogledati na poveznici https://www.ida.hr/hr/bn/poduzetnistvo/poduzetnicke-zone-i-klasteri/poduzetnicke-zone/",
+    "keywords": "nalaze, poduzetničke, zone, istarskoj, županiji",
+    "source": "https://www.ida.hr/hr/bn/poduzetnistvo/poduzetnicke-zone-i-klasteri/poduzetnicke-zone/",
+    "lang": "hr"
+  },
+  {
+    "id": "faq_020",
+    "category": "Poduzetničke zone u Istarskoj županiji",
+    "question": "Gdje mogu naći kontakt kako bi dobio više informacija o poduzetničkoj zoni?",
+    "answer": "Kontakte za poduzetničke zone u Istarskoj županiji možete pronaći na poveznici https://www.ida.hr/hr/bn/poduzetnistvo/poduzetnicke-zone-i-klasteri/poduzetnicke-zone/",
+    "keywords": "naći, kontakt, dobio, informacija, poduzetničkoj, zoni, poduzetničke, zone, istarskoj, županiji",
+    "source": "https://www.ida.hr/hr/bn/poduzetnistvo/poduzetnicke-zone-i-klasteri/poduzetnicke-zone/",
+    "lang": "hr"
+  },
+  {
+    "id": "faq_021",
+    "category": "Savjetovanje poduzetnika i poduzetnika početnika",
+    "question": "Savjetovanje poduzetnika i poduzetnika početnika",
+    "answer": "Istarska razvojna agencija – IDA d.o.o. uz ostaje aktivnosti bavi se i savjetovanjem poduzetnika i poduzetnika početnika. Kontakte djelatnika koji će Vas voditi kroz savjetovanje možete pronaći na poveznici https://www.ida.hr/hr/tn/kontakti/. Kako napisati poslovni plan, koga kontaktirati za otvaranje poduzeća, gdje pronaći moguća financiranja za svoje poduzeće i ostalo kontaktirati djelatnika u IDA-i koji će Vam pomoći. IDA pruža savjetodavnu uslugu oko osnivanja poduzeća ali ne vrši taj proces umjesto Vas.",
+    "keywords": "savjetovanje, poduzetnika, početnika",
+    "source": "https://www.ida.hr/hr/tn/kontakti/.",
+    "lang": "hr"
+  },
+  {
+    "id": "faq_022",
+    "category": "EU projekati u provedbi",
+    "question": "EU projekati u provedbi",
+    "answer": "Uz sve ostale aktivnosti, IDA provodi i nekoliko EU projekata od strateške važnosti za Istarsku županiju. Više o projektima možete pogledati na poveznici https://www.ida.hr/hr/bn/eu-projekti/aktualni-eu-projekti/.  IDA ne piše EU projekte ili druge projekte za poduzetnike. Kao poduzetnik možete se javiti na ida-uprava@ida.hr kako bi predložili partnerstvo u projektu.",
+    "keywords": "projekati, provedbi",
+    "source": "https://www.ida.hr/hr/bn/eu-projekti/aktualni-eu-projekti/.",
+    "lang": "hr"
+  },
+  {
+    "id": "faq_023",
+    "category": "EU projekati u provedbi",
+    "question": "Koje je radno vrijeme Istarske razvojne agencije?",
+    "answer": "Radno vrijeme je od ponedjeljka do petka od 8 do 16 sati.",
+    "keywords": "radno, vrijeme, istarske, razvojne, agencije, projekati, provedbi",
+    "source": "",
+    "lang": "hr"
+  },
+  {
+    "id": "faq_024",
+    "category": "EU projekati u provedbi",
+    "question": "Koji je kontakt od IDAe?",
+    "answer": "Broj telefona +385 52 381 900, e-mail adresa ida-uprava@ida.hr.",
+    "keywords": "kontakt, idae, projekati, provedbi",
+    "source": "",
+    "lang": "hr"
+  }
+]

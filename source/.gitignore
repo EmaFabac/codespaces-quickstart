@@ -1,0 +1,6 @@
+.rasa/
+models/
+.cache/
+source/cache/
+*.tar.gz
+*.log

@@ -1,0 +1,93 @@
+flows:
+  rezervacija_prostora:
+    description: Službeni upit za rezervaciju (IDA/Coworking Pula).
+    nlu_trigger:
+      - intent: start_reservation
+        confidence_threshold: 0.6
+  
+
+    steps:
+      - action: utter_start_reservation
+      - collect: tip_usluge
+
+      - action: action_set_is_ured
+        next:
+          - if: slots.is_ured
+            then: ured_grana
+          - else: ostalo_grana
+
+      # --- UREDSKI PROSTOR ---
+      - collect: oznaka_ureda
+        id: ured_grana
+      - action: action_show_ured_offer
+      - action: action_set_paket_monthly
+        next: potvrda_cijene_blok  # Sada ide na potvrdu cijene prije termina
+
+      # --- OSTALO (Flydesk, Sala, Mletačka, Konferencijska) ---
+      - action: action_route_ostalo
+        id: ostalo_grana
+      - action: action_check_if_sala
+        next:
+          - if: slots.is_sala
+            then: postavi_fiksnu_cijenu_automatski
+          - else: pitaj_paket_rucno
+
+      # SALA & MLETAČKA: Automatski set cijene
+      - action: action_set_sala_offer
+        id: postavi_fiksnu_cijenu_automatski
+        next: potvrda_cijene_blok
+
+      # FLYDESK / OBIČNA KONFERENCIJSKA: Ručni odabir
+      - collect: paket
+        id: pitaj_paket_rucno
+      - action: action_set_flydesk_cijena
+        next: potvrda_cijene_blok
+
+      # POTVRDA CIJENE (Zajednička za sve)
+      - collect: potvrda_paketa
+        id: potvrda_cijene_blok
+        next:
+          - if: slots.potvrda_paketa
+            then: termin_grana
+          - else: odustani_proces
+
+      # TERMIN
+      - collect: termin
+        id: termin_grana
+
+      # OSOBNI PODACI
+      - collect: ime_prezime
+      - collect: email
+      - collect: napomena
+
+      - action: action_check_is_ured_for_summary
+        next:
+          - if: slots.is_ured
+            then: summary_ured_grana
+          - else: summary_ostalo_grana
+
+      - action: utter_summary_ured
+        id: summary_ured_grana
+        next: finalna_potvrda
+
+      - action: utter_summary_ostalo
+        id: summary_ostalo_grana
+
+      - collect: potvrda_rezervacije
+        id: finalna_potvrda
+        next:
+          - if: slots.potvrda_rezervacije
+            then: spremi_baza
+          - else: odustani_proces
+
+      - action: action_save_reservation
+        id: spremi_baza
+        next: kraj_flowa
+
+      - action: utter_reservation_cancelled
+        id: odustani_proces
+        next: END
+
+      - action: utter_official_next_steps
+        id: kraj_flowa
+        next: END
