@@ -7,6 +7,7 @@ flows:
   
 
     steps:
+      - action: action_reset_slots
       - action: utter_start_reservation
       - collect: tip_usluge
 
@@ -45,20 +46,44 @@ flows:
 
       # POTVRDA CIJENE (Zajednička za sve)
       - collect: potvrda_paketa
+        ask_before_filling: true
         id: potvrda_cijene_blok
         next:
           - if: slots.potvrda_paketa
             then: termin_grana
           - else: odustani_proces
 
-      # TERMIN
-      - collect: termin
+      # TERMIN - prebacivanje na sat / nesat
+      - action: action_route_termin
         id: termin_grana
+        next:
+          - if: slots.paket == "1 sat" or slots.tip_usluge == "Mletačka dvorana"
+            then: termin_sat
+          - else: termin_normal
 
-      # OSOBNI PODACI
-      - collect: ime_prezime
+      # 1 SAT: strogi unos
+      - collect: termin_input
+        id: termin_sat
+        ask_before_filling: true
+      - action: action_set_termin
+        next: osobni_podaci   # <--- BITNO: preskoči termin_normal
+
+      # OSTALO
+      - collect: termin
+        id: termin_normal
+        ask_before_filling: true
+        next: osobni_podaci   # <--- BITNO: join
+
+      # OSOBNI PODACI (join point)
+      - collect: ime_prezime_input
+        id: osobni_podaci
+        ask_before_filling: true
+      - action: action_set_ime_prezime
       - collect: email
-      - collect: napomena
+        ask_before_filling: true
+      - collect: napomena_input
+        ask_before_filling: true
+      - action: action_set_napomena
 
       - action: action_check_is_ured_for_summary
         next:
@@ -74,6 +99,7 @@ flows:
         id: summary_ostalo_grana
 
       - collect: potvrda_rezervacije
+        ask_before_filling: true
         id: finalna_potvrda
         next:
           - if: slots.potvrda_rezervacije

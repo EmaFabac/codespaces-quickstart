@@ -27,7 +27,7 @@ class ActionSetSalaOffer(Action):
     def run(self, dispatcher, tracker, domain):
         tip = _norm(tracker.get_slot("tip_usluge") or "")
         if "mletacka" in tip:
-            cijena, paket = "35 € po satu", "po satu"
+            cijena, paket = "35 € po satu", "1 sat"
         else:
             cijena, paket = "24 €", "dan"
         return [SlotSet("paket", paket), SlotSet("cijena", cijena)]
@@ -94,10 +94,51 @@ class ActionCheckIsUredForSummary(Action):
     def run(self, dispatcher, tracker, domain):
         is_ured = tracker.get_slot("is_ured")
         return [SlotSet("is_ured", is_ured)]
+import csv
+import os
+from datetime import datetime
+from typing import Any, Dict, List, Text
+from rasa_sdk import Action, Tracker
+from rasa_sdk.executor import CollectingDispatcher
 
 class ActionSaveReservation(Action):
-    def name(self) -> Text: return "action_save_reservation"
-    def run(self, dispatcher, tracker, domain): return []
+    def name(self) -> Text:
+        return "action_save_reservation"
+
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+
+        path = "data/reservations.csv"
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+
+        row = {
+            "created_at": datetime.now().isoformat(timespec="seconds"),
+            "tip_usluge": tracker.get_slot("tip_usluge") or "",
+            "oznaka_ureda": tracker.get_slot("oznaka_ureda") or "",
+            "paket": tracker.get_slot("paket") or "",
+            "cijena": tracker.get_slot("cijena") or "",
+            "termin": tracker.get_slot("termin") or "",
+            "ime_prezime": tracker.get_slot("ime_prezime") or "",
+            "email": tracker.get_slot("email") or "",
+            "napomena": tracker.get_slot("napomena") or "",
+            "conversation_id": tracker.sender_id,
+        }
+
+        fields = list(row.keys())
+        file_exists = os.path.exists(path)
+
+        with open(path, "a", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=fields)
+            if not file_exists:
+                w.writeheader()
+            w.writerow(row)
+
+        return []
+
 
 class ActionPrepareSummary(Action):
     def name(self) -> Text:
@@ -309,3 +350,69 @@ class ActionAnswerFromKB(Action):
 
         dispatcher.utter_message(text=answer)
         return []
+
+from rasa_sdk import Action, Tracker
+from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.events import SlotSet
+from typing import Any, Dict, List, Text
+
+class ActionSetImePrezime(Action):
+    def name(self) -> Text:
+        return "action_set_ime_prezime"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        text = (tracker.get_slot("ime_prezime_input") or "").strip()
+
+        if len(text.split()) < 2:
+            dispatcher.utter_message(text="Molim upišite ime i prezime (npr. Lovro Turnić).")
+            return [SlotSet("ime_prezime_input", None)]  # da collect ponovno pita
+
+        return [
+            SlotSet("ime_prezime", text),
+            SlotSet("ime_prezime_input", None),
+        ]
+
+
+class ActionSetNapomena(Action):
+    def name(self) -> Text:
+        return "action_set_napomena"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        text = (tracker.get_slot("napomena_input") or "").strip()
+
+        # ako želiš, možeš dopustiti prazno: "Bez napomene"
+        if not text:
+            dispatcher.utter_message(text="Upišite napomenu (ili napišite 'Bez napomene').")
+            return [SlotSet("napomena_input", None)]
+
+        return [
+            SlotSet("napomena", text),
+            SlotSet("napomena_input", None),
+        ]
+
+import re
+TERM_SAT_RE = re.compile(r"^\s*\d{1,2}\.\d{1,2}\.?\s*u\s*\d{1,2}(:\d{2})?\s*$")
+
+class ActionSetTermin(Action):
+    def name(self) -> Text:
+        return "action_set_termin"
+
+    def run(self, dispatcher, tracker, domain):
+        raw = (tracker.get_slot("termin_input") or "").strip()
+
+        if not TERM_SAT_RE.match(raw):
+            dispatcher.utter_message(text="Molim unesite u formatu: 2.2. u 11 ili 2.2. u 11:30.")
+            return [SlotSet("termin_input", None)]
+
+        return [SlotSet("termin", raw), SlotSet("termin_input", None)]
+
+
+
+class ActionRouteTermin(Action):
+    def name(self) -> Text:
+        return "action_route_termin"
+
+    def run(self, dispatcher, tracker, domain):
+        return []
+
+

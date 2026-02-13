@@ -95,3 +95,83 @@ nlu:
       - mogu li unajmiti prostor
       - bookati prostor
       - iznajmljivanje prostora
+
+  - intent: affirm
+    examples: |
+      - da
+      - dа
+      - dda
+      - može
+      - može dalje
+      - naravno
+      - ok
+      - u redu
+      - yes
+
+  - intent: deny
+    examples: |
+      - ne
+      - nе
+      - neću
+      - ne hvala
+      - odustani
+      - no
+  - intent: inform
+    examples: |
+      - Flydesk
+      - Sala za sastanke
+      - Konferencijska dvorana
+      - Mletačka dvorana
+      - Uredski prostor
+  - intent: choose_paket
+    examples: |
+      - 1 sat
+      - 1 dan
+      - 5 dana
+      - 10 dana
+      - 1 mjesec
+      - 3 mjeseca
+  - intent: choose_ured
+    examples: |
+      - 04
+      - 05
+      - 06
+      - 07
+      - 09
+      - Ured 04
+      - Ured 05
+
+  - intent: provide_termin
+    examples: |
+      - 25.02. u 12:00
+      - 25.2. u 9:30
+      - 25.02.
+      - sutra
+      - danas
+      - ponedjeljak u 10
+      - sljedeći tjedan
+
+  - intent: provide_name
+    examples: |
+      - Ana Anić
+      - Ivan Ivić
+      - Marko Horvat
+      - Petra Perić
+
+  - intent: provide_note
+    examples: |
+      - Nemam napomenu
+      - Bez napomene
+      - Trebam projektor
+      - Treba mi mirno mjesto
+  - regex: email
+    examples: |
+      - [A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}
+  - intent: provide_email
+    examples: |
+      - [ana@gmail.com](email)
+      - [test@test.hr](email)
+      - moj mail je [ime.prezime@firma.com](email)
+      - email: [info@ida.hr](email)
+
+

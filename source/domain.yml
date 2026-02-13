@@ -3,96 +3,153 @@ version: "3.1"
 slots:
   tip_usluge:
     type: text
-    mappings: [{ type: from_llm }]
+    mappings:
+      - type: controlled
+
+
   is_ured:
     type: bool
     mappings: [{ type: controlled }]
   is_sala:
     type: bool
     mappings: [{ type: controlled }]
+
   oznaka_ureda:
     type: text
-    mappings: [{ type: from_llm }]
+    mappings:
+      - type: from_entity
+        entity: oznaka_ureda
+
   paket:
     type: text
-    mappings: [{ type: from_llm }]
+    mappings:
+      - type: from_entity
+        entity: paket
+      - type: from_text
+        intent: choose_paket
+
+
   termin:
     type: text
-    mappings: [{ type: from_llm }]
+    mappings:
+      - type: from_text
+        intent: provide_termin
+
+  termin_input:
+    type: text
+    mappings:
+      - type: from_text
+
+  
+  ime_prezime_input:
+    type: text
+    mappings:
+      - type: from_text
+
   ime_prezime:
     type: text
-    mappings: [{ type: from_llm }]
-  email:
+    mappings:
+      - type: controlled
+
+
+  napomena_input:
     type: text
-    mappings: [{ type: from_llm }]
+    mappings:
+      - type: from_text
+
   napomena:
     type: text
-    mappings: [{ type: from_llm }]
+    mappings:
+      - type: controlled
+
+
+
+  email:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: email
+      - type: from_text
+        intent: provide_email
+
+
   cijena:
     type: text
     mappings: [{ type: controlled }]
+
+
   potvrda_paketa:
     type: bool
-    mappings: [{ type: from_llm }]
+    mappings:
+      - type: controlled
+
   potvrda_rezervacije:
     type: bool
-    mappings: [{ type: from_llm }]
+    mappings:
+      - type: controlled
 
 
 responses:
-
-
   utter_ask_tip_usluge:
     - text: "Koji prostor želite rezervirati?"
       buttons:
         - title: "Flydesk"
-          payload: "Flydesk"
+          payload: '/SetSlots(tip_usluge="Flydesk")'
         - title: "Sala za sastanke"
-          payload: "Sala za sastanke"
+          payload: '/SetSlots(tip_usluge="Sala za sastanke")'
         - title: "Konferencijska dvorana"
-          payload: "Konferencijska dvorana"
+          payload: '/SetSlots(tip_usluge="Konferencijska dvorana")'
         - title: "Mletačka dvorana"
-          payload: "Mletačka dvorana"
+          payload: '/SetSlots(tip_usluge="Mletačka dvorana")'
         - title: "Uredski prostor"
-          payload: "Uredski prostor"
+          payload: '/SetSlots(tip_usluge="Uredski prostor")'
+
+
 
   utter_ask_oznaka_ureda:
     - text: "Molimo odaberite ured koji želite rezervirati:"
       buttons:
         - title: "Ured 04"
-          payload: "04"
+          payload: '/choose_ured{{"oznaka_ureda":"04"}}'
         - title: "Ured 05"
-          payload: "05"
+          payload: '/choose_ured{{"oznaka_ureda":"05"}}'
         - title: "Ured 06"
-          payload: "06"
+          payload: '/choose_ured{{"oznaka_ureda":"06"}}'
         - title: "Ured 07"
-          payload: "07"
+          payload: '/choose_ured{{"oznaka_ureda":"07"}}'
         - title: "Ured 09"
-          payload: "09"
+          payload: '/choose_ured{{"oznaka_ureda":"09"}}'
 
   utter_ask_paket:
     - condition:
         - type: slot
           name: tip_usluge
-          value: "konferencijska dvorana"
+          value: "Konferencijska dvorana"
       text: "Odaberite paket za dvoranu:"
       buttons:
         - title: "1 sat"
-          payload: "1 sat"
+          payload: '/choose_paket{{"paket":"1 sat"}}'
         - title: "1 dan"
-          payload: "1 dan"
-    - text: "Odaberite Flydesk paket:"
+          payload: '/choose_paket{{"paket":"1 dan"}}'
+
+
+
+    - condition:
+        - type: slot
+          name: tip_usluge
+          value: "Flydesk"
+      text: "Odaberite Flydesk paket:"
       buttons:
         - title: "1 dan"
-          payload: "1 dan"
+          payload: '/choose_paket{{"paket":"1 dan"}}'
         - title: "5 dana"
-          payload: "5 dana"
+          payload: '/choose_paket{{"paket":"5 dana"}}'
         - title: "10 dana"
-          payload: "10 dana"
+          payload: '/choose_paket{{"paket":"10 dana"}}'
         - title: "1 mjesec"
-          payload: "1 mjesec"
+          payload: '/choose_paket{{"paket":"1 mjesec"}}'
         - title: "3 mjeseca"
-          payload: "3 mjeseca"
+          payload: '/choose_paket{{"paket":"3 mjeseca"}}'
 
   utter_ask_termin:
     - condition:
@@ -100,32 +157,67 @@ responses:
           name: paket
           value: "1 sat"
       text: "Navedite datum i sat (npr. 25.02. u 12:00):"
-    - condition:
-       - type: slot
-         name: tip_usluge
-         value: "Flydesk"
-       - type: slot
-         name: paket
-         value: "1 dan"
-      text: "Za koji datum želite rezervirati Flydesk?"
+
     - condition:
         - type: slot
-          name: is_ured
-          value: true
+          name: tip_usluge
+          value: "Flydesk"
+        - type: slot
+          name: paket
+          value: "1 dan"
+      text: "Za koji datum želite rezervirati Flydesk?"
+
+    - condition:
+        - type: slot
+          name: tip_usluge
+          value: "Flydesk"
+        - type: slot
+          name: paket
+          value: "1 mjesec"
+      text: "Od kojeg datuma želite započeti Vašu rezervaciju (prvi dan korištenja)?"
+
+    - condition:
+        - type: slot
+          name: tip_usluge
+          value: "Flydesk"
+        - type: slot
+          name: paket
+          value: "3 mjeseca"
       text: "Od kojeg datuma želite započeti Vašu rezervaciju (prvi dan korištenja)?"
     - condition:
         - type: slot
           name: tip_usluge
           value: "Flydesk"
+        - type: slot
+          name: paket
+          value: "5 dana"
       text: "Od kojeg datuma želite započeti Vašu rezervaciju (prvi dan korištenja)?"
     - condition:
         - type: slot
+          name: tip_usluge
+          value: "Flydesk"
+        - type: slot
           name: paket
-          value: "po satu"
-      text: "Navedite datum i sat (npr. 25.02. u 12:00):"
+          value: "10 dana"
+      text: "Od kojeg datuma želite započeti Vašu rezervaciju (prvi dan korištenja)?"
+
+    - condition:
+        - type: slot
+          name: is_ured
+          value: true
+      text: "Od kojeg datuma želite započeti Vašu rezervaciju (prvi dan korištenja)?"
+
     - text: "Za koji datum želite rezervaciju"
 
+
+  utter_ask_termin_input:
+    - text: "Navedite datum i sat (npr. 2.2. u 11 ili 2.2. u 11:30):"
+
+
   utter_ask_ime_prezime:
+    - text: "Molimo unesite Vaše ime i prezime:"
+
+  utter_ask_ime_prezime_input:
     - text: "Molimo unesite Vaše ime i prezime:"
 
   utter_ask_email:
@@ -134,11 +226,26 @@ responses:
   utter_ask_napomena:
     - text: "Upišite napomenu: "
 
+  utter_ask_napomena_input:
+    - text: "Upišite napomenu:"
+
   utter_ask_potvrda_paketa:
     - text: "Cijena iznosi {cijena}. Nastavljamo dalje?"
+      buttons:
+        - title: "Da"
+          payload: "/SetSlots(potvrda_paketa=true)"
+        - title: "Ne"
+          payload: "/SetSlots(potvrda_paketa=false)"
 
   utter_ask_potvrda_rezervacije:
-    - text: "Jesu li svi podaci točni (da/ne)?"
+    - text: "Jesu li svi podaci točni?"
+      buttons:
+        - title: "Da"
+          payload: "/SetSlots(potvrda_rezervacije=true)"
+        - title: "Ne"
+          payload: "/SetSlots(potvrda_rezervacije=false)"
+
+
 
   utter_summary_ostalo:
     - text: |
@@ -178,6 +285,7 @@ responses:
     - text: "Super! Što želiš rezervirati: ured, konferencijsku salu ili flydesk?"
 
 actions:
+  - action_reset_slots
   - action_set_is_ured
   - action_show_ured_offer
   - action_set_paket_monthly
@@ -188,7 +296,11 @@ actions:
   - action_save_reservation
   - action_check_is_ured_for_summary
   - action_answer_from_kb
-
+  - action_set_ime_prezime
+  - action_set_napomena
+  - action_set_termin_sat
+  - action_set_termin
+  - action_route_termin
 
 #q&a
 
@@ -202,3 +314,19 @@ intents:
   - ask_location  # Dodaj ovo
   - ask_id_info   #
   - ask_bank_criteria
+  - inform
+  - affirm
+  - deny
+  - choose_paket
+  - choose_ured
+  - provide_termin
+  - provide_name
+  - provide_note
+  - provide_email
+
+
+entities:
+  - tip_usluge
+  - paket
+  - oznaka_ureda
+  - email
