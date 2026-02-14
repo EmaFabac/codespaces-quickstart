@@ -4,10 +4,10 @@ flows:
     nlu_trigger:
       - intent: start_reservation
         confidence_threshold: 0.6
-  
 
     steps:
       - action: action_reset_slots
+      - action: action_set_in_reservation_true
       - action: utter_start_reservation
       - collect: tip_usluge
 
@@ -22,7 +22,7 @@ flows:
         id: ured_grana
       - action: action_show_ured_offer
       - action: action_set_paket_monthly
-        next: potvrda_cijene_blok  # Sada ide na potvrdu cijene prije termina
+        next: potvrda_cijene_blok
 
       # --- OSTALO (Flydesk, Sala, Mletačka, Konferencijska) ---
       - action: action_route_ostalo
@@ -66,13 +66,53 @@ flows:
         id: termin_sat
         ask_before_filling: true
       - action: action_set_termin
-        next: osobni_podaci   # <--- BITNO: preskoči termin_normal
+        next: ured_check_extra
 
-      # OSTALO
+      # OSTALO: termin bez sata (ili slobodni unos)
       - collect: termin
         id: termin_normal
         ask_before_filling: true
-        next: osobni_podaci   # <--- BITNO: join
+        next: ured_check_extra
+
+      # --- ROUTING KORAK (ne skuplja slot, samo grananje) ---
+      - action: action_route_ured_extra
+        id: ured_check_extra
+        next:
+          - if: slots.is_ured
+            then: ured_dodatni_start
+          - else: osobni_podaci
+
+      # --- DODATNI PODACI SAMO ZA URED ---
+      - collect: naziv_pravne_osobe
+        id: ured_dodatni_start
+        ask_before_filling: true
+      - collect: ovlastena_osoba
+        ask_before_filling: true
+      - collect: adresa
+        ask_before_filling: true
+      - collect: telefon
+        ask_before_filling: true
+      - collect: web_stranica
+        ask_before_filling: true
+      - collect: oib
+        ask_before_filling: true
+      - collect: sektor
+        ask_before_filling: true
+      - collect: broj_zaposlenih
+        ask_before_filling: true
+      - collect: datum_osnivanja
+        ask_before_filling: true
+      - collect: opis_poslovanja
+        ask_before_filling: true
+      - collect: inovativni_aspekti
+        ask_before_filling: true
+      - collect: doprinos_zajednici
+        ask_before_filling: true
+      - collect: ostale_napomene
+        ask_before_filling: true
+      - collect: mjesto_datum
+        ask_before_filling: true
+        next: osobni_podaci
 
       # OSOBNI PODACI (join point)
       - collect: ime_prezime_input
@@ -97,6 +137,7 @@ flows:
 
       - action: utter_summary_ostalo
         id: summary_ostalo_grana
+        next: finalna_potvrda
 
       - collect: potvrda_rezervacije
         ask_before_filling: true
@@ -110,10 +151,14 @@ flows:
         id: spremi_baza
         next: kraj_flowa
 
-      - action: utter_reservation_cancelled
+      # --- ODUSTAJANJE ---
+      - action: action_set_in_reservation_false
         id: odustani_proces
+      - action: utter_reservation_cancelled
         next: END
 
-      - action: utter_official_next_steps
+      # --- USPJEŠAN KRAJ ---
+      - action: action_set_in_reservation_false
         id: kraj_flowa
+      - action: utter_official_next_steps
         next: END

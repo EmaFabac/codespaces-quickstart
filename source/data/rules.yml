@@ -29,18 +29,27 @@ rules:
       - active_loop: null
       - action: action_answer_from_kb
 
-  # --- Normalni Q&A (kad nema active loopa) ---
-  - rule: Bank criteria normalno
-    steps:
-      - intent: ask_bank_criteria
-      - action: action_answer_from_kb
-
-  - rule: FAQ normalno
+  # --- Normalni Q&A (SAMO kad NIJE rezervacija) ---
+  - rule: FAQ normalno (nije rezervacija)
+    condition:
+      - slot_was_set:
+          - in_reservation: false
     steps:
       - intent: ask_kb
       - action: action_answer_from_kb
 
-  - rule: Kontakt normalno
+  - rule: Bank criteria normalno (nije rezervacija)
+    condition:
+      - slot_was_set:
+          - in_reservation: false
+    steps:
+      - intent: ask_bank_criteria
+      - action: action_answer_from_kb
+
+  - rule: Kontakt normalno (nije rezervacija)
+    condition:
+      - slot_was_set:
+          - in_reservation: false
     steps:
       - intent: ask_contact
       - action: utter_contact
@@ -53,4 +62,4 @@ rules:
       - intent: deny
       - action: action_deactivate_loop
       - active_loop: null
-      - action: utter_goodbye   # ili utter_ok ako želiš
+      - action: utter_goodbye

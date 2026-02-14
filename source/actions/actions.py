@@ -125,6 +125,20 @@ class ActionSaveReservation(Action):
             "ime_prezime": tracker.get_slot("ime_prezime") or "",
             "email": tracker.get_slot("email") or "",
             "napomena": tracker.get_slot("napomena") or "",
+            "naziv_pravne_osobe": tracker.get_slot("naziv_pravne_osobe") or "",
+            "ovlastena_osoba": tracker.get_slot("ovlastena_osoba") or "",
+            "adresa": tracker.get_slot("adresa") or "",
+            "telefon": tracker.get_slot("telefon") or "",
+            "web_stranica": tracker.get_slot("web_stranica") or "",
+            "oib": tracker.get_slot("oib") or "",
+            "sektor": tracker.get_slot("sektor") or "",
+            "broj_zaposlenih": tracker.get_slot("broj_zaposlenih") or "",
+            "datum_osnivanja": tracker.get_slot("datum_osnivanja") or "",
+            "opis_poslovanja": tracker.get_slot("opis_poslovanja") or "",
+            "inovativni_aspekti": tracker.get_slot("inovativni_aspekti") or "",
+            "doprinos_zajednici": tracker.get_slot("doprinos_zajednici") or "",
+            "ostale_napomene": tracker.get_slot("ostale_napomene") or "",
+            "mjesto_datum": tracker.get_slot("mjesto_datum") or "",
             "conversation_id": tracker.sender_id,
         }
 
@@ -286,8 +300,10 @@ class ActionAnswerFromKB(Action):
 
         return self._kb_cache
 
-    def _best_match(self, user_msg: str, kb: List[Dict[str, Any]]) -> Tuple[Optional[Dict[str, Any]], float]:
-        """Vrati (najbolji_item, best_score) ili (None, 0)."""
+    def _best_match(
+        self, user_msg: str, kb: List[Dict[str, Any]]
+    ) -> Tuple[Optional[Dict[str, Any]], float]:
+        """Vrati (najbolji_item, best_score) ili (None, score)."""
         scored: List[Tuple[float, Dict[str, Any]]] = []
 
         for item in kb:
@@ -307,9 +323,13 @@ class ActionAnswerFromKB(Action):
         if self._debug:
             q = _kb_normalize(user_msg)
             print(f"[KB] Query: {q}")
-            print(f"[KB] Best: {best_item.get('id')} score={best_score:.2f} q='{best_item.get('question')}'")
+            print(
+                f"[KB] Best: {best_item.get('id')} score={best_score:.2f} q='{best_item.get('question')}'"
+            )
             if len(scored) > 1:
-                print(f"[KB] Second: {scored[1][1].get('id')} score={second_score:.2f} q='{scored[1][1].get('question')}'")
+                print(
+                    f"[KB] Second: {scored[1][1].get('id')} score={second_score:.2f} q='{scored[1][1].get('question')}'"
+                )
             print(f"[KB] Thresholds: MIN_SCORE={self.MIN_SCORE}, MIN_MARGIN={self.MIN_MARGIN}")
 
         # Filter: minimum score + margin
@@ -326,6 +346,11 @@ class ActionAnswerFromKB(Action):
         tracker: Tracker,
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
+
+        # ✅ KLJUČNO: Ne odgovaraj iz KB dok traje rezervacija (flow slot-filling)
+        # in_reservation postavljaš na True na početku flow-a, a na False na kraju.
+        if tracker.get_slot("in_reservation"):
+            return []
 
         user_msg = (tracker.latest_message.get("text", "") or "").strip()
 
@@ -350,6 +375,7 @@ class ActionAnswerFromKB(Action):
 
         dispatcher.utter_message(text=answer)
         return []
+
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
@@ -415,4 +441,33 @@ class ActionRouteTermin(Action):
     def run(self, dispatcher, tracker, domain):
         return []
 
+from typing import Any, Dict, List, Text
+from rasa_sdk import Action, Tracker
+from rasa_sdk.executor import CollectingDispatcher
 
+class ActionRouteUredExtra(Action):
+    def name(self) -> Text:
+        return "action_route_ured_extra"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        return []
+
+
+from rasa_sdk import Action, Tracker
+from rasa_sdk.events import SlotSet
+from rasa_sdk.executor import CollectingDispatcher
+from typing import Any, Dict, List, Text
+
+class ActionSetInReservationTrue(Action):
+    def name(self) -> Text:
+        return "action_set_in_reservation_true"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        return [SlotSet("in_reservation", True)]
+
+class ActionSetInReservationFalse(Action):
+    def name(self) -> Text:
+        return "action_set_in_reservation_false"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        return [SlotSet("in_reservation", False)]
