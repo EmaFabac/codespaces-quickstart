@@ -1,19 +1,56 @@
 version: "3.1"
 
 rules:
-  - rule: Kontakt
+  # --- Ako je continue_conversation aktivan, FAQ ga prekida ---
+  - rule: FAQ prekida continue_conversation
+    condition:
+      - active_loop: continue_conversation
+    steps:
+      - intent: ask_kb
+      - action: action_deactivate_loop
+      - active_loop: null
+      - action: action_answer_from_kb
+
+  - rule: Kontakt prekida continue_conversation
+    condition:
+      - active_loop: continue_conversation
     steps:
       - intent: ask_contact
+      - action: action_deactivate_loop
+      - active_loop: null
       - action: utter_contact
 
-  - rule: Bank criteria -> KB
+  - rule: Bank criteria prekida continue_conversation
+    condition:
+      - active_loop: continue_conversation
+    steps:
+      - intent: ask_bank_criteria
+      - action: action_deactivate_loop
+      - active_loop: null
+      - action: action_answer_from_kb
+
+  # --- Normalni Q&A (kad nema active loopa) ---
+  - rule: Bank criteria normalno
     steps:
       - intent: ask_bank_criteria
       - action: action_answer_from_kb
 
-  - rule: FAQ preko baze znanja
+  - rule: FAQ normalno
     steps:
       - intent: ask_kb
       - action: action_answer_from_kb
 
+  - rule: Kontakt normalno
+    steps:
+      - intent: ask_contact
+      - action: utter_contact
 
+  # --- Ako user kaže "Ne" na continue_conversation ---
+  - rule: Continue - user says no
+    condition:
+      - active_loop: continue_conversation
+    steps:
+      - intent: deny
+      - action: action_deactivate_loop
+      - active_loop: null
+      - action: utter_goodbye   # ili utter_ok ako želiš

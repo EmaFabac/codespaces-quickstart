@@ -1,6 +1,11 @@
 version: "3.1"
 
 slots:
+  requested_slot:
+    type: text
+    mappings:
+      - type: custom
+
   tip_usluge:
     type: text
     mappings:
@@ -87,6 +92,16 @@ slots:
     type: bool
     mappings:
       - type: controlled
+
+  continue_conversation:
+    type: bool
+    mappings:
+      - type: from_intent
+        intent: affirm
+        value: true
+      - type: from_intent
+        intent: deny
+        value: false
 
 
 responses:
@@ -282,7 +297,20 @@ responses:
   utter_bank_criteria_fallback:
     - text: "Nemam tu informaciju u bazi. Želiš li da ti pošaljem kontakt IDA-e ili da preformuliraš pitanje (npr. naziv programa/kreditne linije)?"
   utter_start_reservation:
-    - text: "Super! Što želiš rezervirati: ured, konferencijsku salu ili flydesk?"
+    - text: "Super!"
+
+
+  utter_ask_continue_conversation:
+    - text: "Imate li još nešto što bih mogao pomoći?"
+      buttons:
+        - title: "Da"
+          payload: "/affirm"
+        - title: "Ne"
+          payload: "/deny"
+
+  utter_goodbye:
+    - text: "U redu 🙂 Ako zatrebate nešto, tu sam."
+
 
 actions:
   - action_reset_slots
@@ -330,3 +358,11 @@ entities:
   - paket
   - oznaka_ureda
   - email
+
+
+
+
+forms:
+  continue_conversation:
+    required_slots:
+      - continue_conversation

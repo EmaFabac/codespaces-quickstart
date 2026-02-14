@@ -26,8 +26,7 @@ pipeline:
   - name: NLUCommandAdapter
 
 policies:
-  - name: FlowPolicy
-    priority: 10  
   - name: RulePolicy
-    priority: 6 # RulePolicy mora biti najjači
- # FlowPolicy stavljamo na dno
+    priority: 20
+  - name: FlowPolicy
+    priority: 10
