@@ -32,10 +32,17 @@ nlu:
     examples: |
       - Gdje se nalazite?
       - Koja je adresa?
-      - Kako doći do vas?
       - gdje je ida
       - lokacija ida pula
       - u kojoj ste ulici
+      - kako doci do ida
+      - kako doći do ida
+      - kako doći do coworking pula
+      - kako doci do coworking pula
+      - upute za dolazak
+      - gdje se nalazi coworking pula
+      - kako do vas
+
 
   - intent: ask_kb
     examples: |
@@ -173,5 +180,4 @@ nlu:
       - [test@test.hr](email)
       - moj mail je [ime.prezime@firma.com](email)
       - email: [info@ida.hr](email)
-
 

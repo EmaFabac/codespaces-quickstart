@@ -1,7 +1,7 @@
 version: "3.1"
 
 rules:
-  # --- Ako je continue_conversation aktivan, FAQ ga prekida ---
+  # --- Ako je continue_conversation aktivan, Q&A ga prekida ---
   - rule: FAQ prekida continue_conversation
     condition:
       - active_loop: continue_conversation
@@ -9,7 +9,16 @@ rules:
       - intent: ask_kb
       - action: action_deactivate_loop
       - active_loop: null
-      - action: action_answer_from_kb
+      - action: action_answer
+
+  - rule: Lokacija prekida continue_conversation
+    condition:
+      - active_loop: continue_conversation
+    steps:
+      - intent: ask_location
+      - action: action_deactivate_loop
+      - active_loop: null
+      - action: action_answer
 
   - rule: Kontakt prekida continue_conversation
     condition:
@@ -27,7 +36,8 @@ rules:
       - intent: ask_bank_criteria
       - action: action_deactivate_loop
       - active_loop: null
-      - action: action_answer_from_kb
+      - action: action_answer
+
 
   # --- Normalni Q&A (SAMO kad NIJE rezervacija) ---
   - rule: FAQ normalno (nije rezervacija)
@@ -36,7 +46,15 @@ rules:
           - in_reservation: false
     steps:
       - intent: ask_kb
-      - action: action_answer_from_kb
+      - action: action_answer
+
+  - rule: Lokacija normalno (nije rezervacija)
+    condition:
+      - slot_was_set:
+          - in_reservation: false
+    steps:
+      - intent: ask_location
+      - action: action_answer
 
   - rule: Bank criteria normalno (nije rezervacija)
     condition:
@@ -44,7 +62,7 @@ rules:
           - in_reservation: false
     steps:
       - intent: ask_bank_criteria
-      - action: action_answer_from_kb
+      - action: action_answer
 
   - rule: Kontakt normalno (nije rezervacija)
     condition:
@@ -53,6 +71,7 @@ rules:
     steps:
       - intent: ask_contact
       - action: utter_contact
+
 
   # --- Ako user kaže "Ne" na continue_conversation ---
   - rule: Continue - user says no
@@ -63,3 +82,11 @@ rules:
       - action: action_deactivate_loop
       - active_loop: null
       - action: utter_goodbye
+
+  - rule: ID info normalno (nije rezervacija)
+    condition:
+      - slot_was_set:
+          - in_reservation: false
+    steps:
+      - intent: ask_id_info
+      - action: action_answer

@@ -11,13 +11,15 @@ slots:
     mappings:
       - type: controlled
 
-
   is_ured:
     type: bool
-    mappings: [{ type: controlled }]
+    mappings:
+      - type: controlled
+
   is_sala:
     type: bool
-    mappings: [{ type: controlled }]
+    mappings:
+      - type: controlled
 
   oznaka_ureda:
     type: text
@@ -33,19 +35,16 @@ slots:
       - type: from_text
         intent: choose_paket
 
-
   termin:
     type: text
     mappings:
       - type: from_text
-        intent: [provide_termin, inform]
 
   termin_input:
     type: text
     mappings:
       - type: from_text
 
-  
   ime_prezime_input:
     type: text
     mappings:
@@ -55,7 +54,6 @@ slots:
     type: text
     mappings:
       - type: controlled
-
 
   napomena_input:
     type: text
@@ -67,8 +65,6 @@ slots:
     mappings:
       - type: controlled
 
-
-
   email:
     type: text
     mappings:
@@ -77,11 +73,10 @@ slots:
       - type: from_text
         intent: provide_email
 
-
   cijena:
     type: text
-    mappings: [{ type: controlled }]
-
+    mappings:
+      - type: controlled
 
   potvrda_paketa:
     type: bool
@@ -102,8 +97,6 @@ slots:
       - type: from_intent
         intent: deny
         value: false
-
-
 
   naziv_pravne_osobe:
     type: text
@@ -198,8 +191,6 @@ responses:
         - title: "Uredski prostor"
           payload: '/SetSlots(tip_usluge="Uredski prostor")'
 
-
-
   utter_ask_oznaka_ureda:
     - text: "Molimo odaberite ured koji želite rezervirati:"
       buttons:
@@ -225,8 +216,6 @@ responses:
           payload: '/choose_paket{{"paket":"1 sat"}}'
         - title: "1 dan"
           payload: '/choose_paket{{"paket":"1 dan"}}'
-
-
 
     - condition:
         - type: slot
@@ -278,6 +267,7 @@ responses:
           name: paket
           value: "3 mjeseca"
       text: "Od kojeg datuma želite započeti Vašu rezervaciju (prvi dan korištenja)?"
+
     - condition:
         - type: slot
           name: tip_usluge
@@ -286,6 +276,7 @@ responses:
           name: paket
           value: "5 dana"
       text: "Od kojeg datuma želite započeti Vašu rezervaciju (prvi dan korištenja)?"
+
     - condition:
         - type: slot
           name: tip_usluge
@@ -303,10 +294,8 @@ responses:
 
     - text: "Za koji datum želite rezervaciju"
 
-
   utter_ask_termin_input:
     - text: "Navedite datum i sat (npr. 2.2. u 11 ili 2.2. u 11:30):"
-
 
   utter_ask_ime_prezime:
     - text: "Molimo unesite Vaše ime i prezime:"
@@ -315,7 +304,7 @@ responses:
     - text: "Molimo unesite Vaše ime i prezime:"
 
   utter_ask_email:
-      - text: "Vaš e-mail:"
+    - text: "Vaš e-mail:"
 
   utter_ask_napomena:
     - text: "Upišite napomenu: "
@@ -338,8 +327,6 @@ responses:
           payload: "/SetSlots(potvrda_rezervacije=true)"
         - title: "Ne"
           payload: "/SetSlots(potvrda_rezervacije=false)"
-
-
 
   utter_summary_ostalo:
     - text: |
@@ -384,16 +371,15 @@ responses:
   utter_kb_fallback:
     - text: "Nemam tu informaciju u bazi. Možeš li malo drugačije formulirati pitanje ili želiš kontakt IDA-e?"
 
-  utter_ida_phone:
-    - text: "Telefon IDA-e je +385 52 381 900."
 
   utter_contact:
     - text: "Glavni kontakt broj telefona je +385 52 381 900, a službena e-mail adresa je ida-uprava@ida.hr."
+
   utter_bank_criteria_fallback:
     - text: "Nemam tu informaciju u bazi. Želiš li da ti pošaljem kontakt IDA-e ili da preformuliraš pitanje (npr. naziv programa/kreditne linije)?"
+
   utter_start_reservation:
     - text: "Super!"
-
 
   utter_ask_continue_conversation:
     - text: "Imate li još nešto što bih mogao pomoći?"
@@ -405,8 +391,6 @@ responses:
 
   utter_goodbye:
     - text: "U redu 🙂 Ako zatrebate nešto, tu sam."
-
-
 
   utter_ask_naziv_pravne_osobe:
     - text: "Ime poduzeća/obrta/druge pravne osobe podnositelja zahtjeva:"
@@ -451,8 +435,10 @@ responses:
     - text: "Mjesto i datum:"
 
 
-
 actions:
+  # BITNO: ovo dodaj da možeš filtrirati slot filling u actions.py
+  - action_extract_slots
+
   - action_reset_slots
   - action_set_is_ured
   - action_show_ured_offer
@@ -466,24 +452,21 @@ actions:
   - action_answer_from_kb
   - action_set_ime_prezime
   - action_set_napomena
-  - action_set_termin_sat
   - action_set_termin
   - action_route_termin
   - action_route_ured_extra
   - action_set_in_reservation_true
   - action_set_in_reservation_false
+  - action_answer
 
-#q&a
 
 
 intents:
   - start_reservation
-  - greet
-  - goodbye
   - ask_kb
-  - ask_contact   # Dodaj ovo
-  - ask_location  # Dodaj ovo
-  - ask_id_info   #
+  - ask_contact
+  - ask_location
+  - ask_id_info
   - ask_bank_criteria
   - inform
   - affirm
@@ -501,8 +484,6 @@ entities:
   - paket
   - oznaka_ureda
   - email
-
-
 
 
 forms:

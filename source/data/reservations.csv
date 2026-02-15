@@ -1,8 +1,37 @@
 created_at,tip_usluge,oznaka_ureda,paket,cijena,termin,ime_prezime,email,napomena,is_ured,is_sala,conversation_id
 2026-02-13T22:53:38.944181+00:00,Flydesk,,1 mjesec,190 €,2.2.,Ema Fabac,ema@gamil.com,napomena za mene,false,false,DnpXjlu3ELuLc5aHAAAB
-2026-02-13T23:00:58,Flydesk,,5 dana,55 €,2.2.,ema fabac,ema@gmail.com,napomena za men,oclm5rtcxT_YLAaSAAAB
-2026-02-13T23:01:40,Mletačka dvorana,,1 sat,35 € po satu,2.2. u 11,ivo ivic,ivo@gmail.com,napomena od ive,oclm5rtcxT_YLAaSAAAB
-2026-02-13T23:13:04,Flydesk,,5 dana,55 €,2.2.,ema em,ema@gmail.com,napomena je tu,fIVf-gHdQ10PwxaOAAAB
-2026-02-13T23:13:42,Mletačka dvorana,,1 sat,35 € po satu,,ema ema,ema@gmail.com,napomena ide tu,T_gTQoakpfX_byDQAAAD
-2026-02-13T23:14:27,Konferencijska dvorana,,1 sat,105 €,2.2. u 11,ema i ema,ema@gamil.com,napomena jel,T_gTQoakpfX_byDQAAAD
-2026-02-13T23:17:28,"""Uredski prostor""",06,mjesec,294 €,2.2.,e e,kkk@gmail.xom,napoo,rvp_FSxMdHCefsYJAAAN
+2026-02-14T10:31:03,Flydesk,,5 dana,55 €,2.2.,ema ema,ema@gmail.com,ne treba mi napomena,vzdnIqeSTS-rMsLuAAAD
+2026-02-14T10:38:15,Flydesk,,10 dana,95 €,2.2.,ema fabb,ema@gmail.com,ne treba mi napomena,gKPlldBAN6gRZ0pcAAAF
+2026-02-14T10:38:59,Mletačka dvorana,,1 sat,35 € po satu,2.2. u 11,Ema Fabac,ema@gmailcom,ne trebami napoemna,gKPlldBAN6gRZ0pcAAAF
+2026-02-14T10:40:00,Sala za sastanke,,dan,24 €,3.3.,Ema Fabac,ema@gmail.com,ne treba mi napoemna,gKPlldBAN6gRZ0pcAAAF
+2026-02-14T10:54:57,Sala za sastanke,,dan,24 €,2.2.,Iva Ivicc,iva@gmail.com,Ne treba mi napomena,LoveMySelf,,,,,,,,,,,,,,v9WOg_nYVR2cDsuGAAAH
+2026-02-14T11:03:10,Flydesk,,5 dana,55 €,2.2.,ema ema,ema@gmail.com,ne treba mi napomena,,,,,,,,,,,,,,,xMfyysQUGUNuf83XAAAD
+2026-02-14T11:06:47,"""Uredski prostor""",05,nemam ostalih napomena,304.5 €,2.2.,Ivanko Ivic,ivako@gmail.com,nemam napomene,HelpMe,Ivana Ivic,Zagreb ulicaa,2020202020,bootagain.com,2020202020,sektor a,45,4.4.20205,posao,ne treba mi to,neznam niti to,nemam ostalih napomena,zagreb 2.2.,xMfyysQUGUNuf83XAAAD
+2026-02-14T11:15:58,Flydesk,,1 dan,13 €,1.1.2025,Ema Fabac,ema@gmail.com,ne treba minapomena,1.1.,1.1.,1.1.,1.1.,1.1.,1.1.,1.1.,1.1.,1.1.,1.1.,1.1.,1.1.,1.1.,1.1.,xwl73djSCaMOr05pAAAD
+2026-02-14T11:40:19,"""Uredski prostor""",05,Trebat ćemo 2 pristupne kartice i osnovne informacije o parkingu.,304.5 €,2.2.2026,Ema Fabac,ema@gmail.com,Bez dodatnih napomena,GreenWave Labs d.o.o.,EMa Fabac,"Radnička cesta 12, 10000 Zagreb",+385 91 234 5678,www.greeenweve.com,12345678901,IT usluge i razvoj softvera,6,15.09.2022,"Razvijamo SaaS platformu za upravljanje energijom u manjim poslovnim objektima (praćenje potrošnje, optimizacija i izvještavanje).",Koristimo modele predikcije potrošnje i automatske preporuke za smanjenje troškova; planiramo pilot integraciju s IoT senzorima u prostoru.,"Sudjelovanje u meetupovima, mentoriranje početnika, dijeljenje iskustava o razvoju proizvoda i internacionalizaciji te suradnja s drugim timovima u centru.",Trebat ćemo 2 pristupne kartice i osnovne informacije o parkingu.,"Zagreb, 02.02.2026.",2AxMNt5BFv5lI9g1AAAD
+2026-02-14T11:41:25,Flydesk,,5 dana,55 €,2.2.2026,Ema Fabac,emafa@gmail.com,nemam dodatnih napoomna,,,,,,,,,,,,,,,2AxMNt5BFv5lI9g1AAAD
+2026-02-14T11:42:43,Sala za sastanke,,nema vise napomena,24 €,2.2.2022,ema fabac,e@gmail.com,nema vise napomena,,,,,,,,,,,,,,,2AxMNt5BFv5lI9g1AAAD
+2026-02-14T11:43:36,Sala za sastanke,,dan,24 €,2.2.2026,ema fabac,ema@gmail.com,nemam dodaatnih napomene,,,,,,,,,,,,,,,vV3qX2yaap6npu1OAAAF
+2026-02-14T12:21:20,Flydesk,,5 dana,55 €,1.1.2026,Ema Fabac,ema@gmail.com,nemam dodatne napomene,,,,,,,,,,,,,,,hRcYl62nu-MewaZaAAAB
+2026-02-14T12:23:48,"""Uredski prostor""",07,mjesec,217 €,1.1.2026,,ema@gmail.com,nemam dodatne napomene,Big wase,EMa fabac,zagrec r<dnicka ulica,20202020200,www.udos.com,202020202,it sektor,5,2.2.2025,poslovanje je teško,inovacije koje bi uveli su,doveli bi veci profit,nema dodatnih napomena,zagreb 2.2.,hRcYl62nu-MewaZaAAAB
+2026-02-14T12:24:49,Mletačka dvorana,,1 sat,35 € po satu,2.2. u 11,Ema Fabac,ema@gmail.com,nema dodatne napomene,,,,,,,,,,,,,,,Bv6jcISYJl0trDcdAAAD
+2026-02-14T12:34:29,Flydesk,,10 dana,95 €,1.1.2026,EMa fabac,ema@gmail.com,nema dodatnih napomena,,,,,,,,,,,,,,,od9nL9hTZSa9-QBwAAAD
+2026-02-14T12:35:13,Sala za sastanke,,dan,24 €,1.1.2026,EMa Fabac,ema@gmail.com,HAHAHHAAHA,,,,,,,,,,,,,,,od9nL9hTZSa9-QBwAAAD
+2026-02-14T12:38:11,"""Uredski prostor""",04,mjesec,304.5 €,01.03.2026,Marko Markić,marko@test.com,Bez napomene,Firma d.o.o.,Ana Anićević,"Ulica 1, Pula",091 111 1111,firma.hr,12345678901,IT,5,2.2.2020,Razvoj softvera,AI alat za ...,Radionice za ...,Nema,"Pula, 01.02.2026",od9nL9hTZSa9-QBwAAAD
+2026-02-14T12:41:37,Flydesk,,1 dan,13 €,1.1.2026,Ema Fabac,ema@gmail.com,Nema dodatnih napomena,,,,,,,,,,,,,,,Ght3KJvdU84TUb_uAAAD
+2026-02-14T14:41:41,Flydesk,,10 dana,95 €,2.2.2026,Ema Fabac,emafabac@gmail.com,Nema dodatne napomene,,,,,,,,,,,,,,,iL4bNt7Ey28WWOktAAAB
+2026-02-14T14:42:55,Mletačka dvorana,,1 sat,35 € po satu,2.3. u 16,Ivo Ivič,ivoivic@gmail.com,Nemam napomene,,,,,,,,,,,,,,,iL4bNt7Ey28WWOktAAAB
+2026-02-14T14:44:00,Konferencijska dvorana,,1 sat,105 €,,Nikolina Noris,nikolinanoris@gmail.com,Trebat ce mi za ucenje,,,,,,,,,,,,,,,iL4bNt7Ey28WWOktAAAB
+2026-02-14T14:44:51,Flydesk,,1 dan,13 €,4.4.2025,Luka Modric,lukamodric@gmail.com,Nogometas sam,,,,,,,,,,,,,,,iL4bNt7Ey28WWOktAAAB
+2026-02-14T16:06:38,Flydesk,,1 dan,13 €,1.1.2025,ema danas,ema@gmail.com,nema,,,,,,,,,,,,,,,tpCJKJkqzvY8EQMxAAAF
+2026-02-14T16:10:19,Sala za sastanke,,dan,24 €,1.1.2025,ema fabac,ema@gmail.com,nemam napomene,,,,,,,,,,,,,,,8990ac1c4a084e5daf8a60f5508fcf4a
+2026-02-14T18:41:55,Flydesk,,10 dana,95 €,1.1.2025,Ema fabac,ema@gmaol.com,napm7,,,,,,,,,,,,,,,Me9EJ008rumnVXmmAAAD
+2026-02-14T18:44:21,"""Uredski prostor""",07,mjesec,217 €,1.1.2025,ema fabac,ema@gmail.com,nemam dodatnihnapomena,tvrtsa d.o.o,ema fabac,ulica 5 pula,5050505050,www.ema.com,50505055500,it,5,5.5.2025,poslovanje je veoma zahtjevno,novi mobiteli,novi kompovi,nema ostalih napomena,2.2.2025,Me9EJ008rumnVXmmAAAD
+2026-02-14T20:20:28,Flydesk,,1 dan,13 €,1.1.2025,ema fabac,ema@gmail.com,nemam napomene,,,,,,,,,,,,,,,0e140b73450e4cb287129554e89ccb17
+2026-02-14T20:27:27,Mletačka dvorana,,1 sat,35 € po satu,2.2 u 11,ema fbac,ema@gmail.com,nema napomene,,,,,,,,,,,,,,,TRGUZIMRNVjj8ZgyAAAD
+2026-02-14T20:45:19,Flydesk,,1 dan,13 €,1.1.2025,ema fabac,email.com,nemam,,,,,,,,,,,,,,,af6a714ae510427fbd50f7c2f5b2c7ee
+2026-02-14T21:12:47,Mletačka dvorana,,1 sat,35 € po satu,2.2. u 11,ema faabc,ema@gmail.com,nema napomene,,,,,,,,,,,,,,,1e8c426c4a324db2a3ec72954af47a8c
+2026-02-14T23:00:55,Flydesk,,1 dan,13 €,1.1.2026,Ema Fabac,ema@gmail.com,nema napomene,,,,,,,,,,,,,,,aN50xmYDs8E88dQvAAAF
+2026-02-15T00:10:33,Flydesk,,1 dan,13 €,1.1.2026.,ema fabac,ema@gmail.com,nema napomene,,,,,,,,,,,,,,,d05f67530ffe4464899f131b4a08e569
+2026-02-15T00:35:24,Konferencijska dvorana,,1 sat,105 €,2.2. u 11,ema fabac,emafabac@gmail.com,neam napomene,,,,,,,,,,,,,,,ysZkX5fBHDvxHlK-AAAH
+2026-02-15T00:53:06,"""Uredski prostor""",07,mjesec,217 €,6.6.2026,ema fabac,ema@gmail.com,nema napomene,Poduzece 1,Ema Fabac,Radiceva ulica 7 zagreb,50505005505,www.dobroje.com,20220202020,it,5,2.2.2010,posao ko posao,nista inovativno,ali veliki profit,nemam vise napomena,zagreb 2.2.2025,rgRfuC5yQZPcCeWiAAAL
