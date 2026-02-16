@@ -66,13 +66,20 @@ flows:
         id: termin_sat
         ask_before_filling: true
       - action: action_set_termin
-        next: ured_check_extra
+        next: 
+            - if: slots.termin == null
+              then: termin_sat
+            - else: ured_check_extra  
 
       # OSTALO: termin bez sata (ili slobodni unos)
       - collect: termin
         id: termin_normal
         ask_before_filling: true
-        next: ured_check_extra
+      - action: action_validate_termin_general
+        next:
+            - if: slots.termin == null
+              then: termin_normal
+            - else: ured_check_extra
 
       # --- ROUTING KORAK (ne skuplja slot, samo grananje) ---
       - action: action_route_ured_extra
@@ -118,9 +125,17 @@ flows:
       - collect: ime_prezime_input
         id: osobni_podaci
         ask_before_filling: true
+
       - action: action_set_ime_prezime
+        next:
+          - if: slots.ime_prezime == null
+            then: osobni_podaci
+          - else: email_korak
+
       - collect: email
+        id: email_korak
         ask_before_filling: true
+
       - collect: napomena_input
         ask_before_filling: true
       - action: action_set_napomena

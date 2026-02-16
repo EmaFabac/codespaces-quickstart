@@ -194,10 +194,6 @@ RESERVATION_ONLY_SLOTS = {
 
 
 class ActionExtractSlots(Action):
-    """
-    Rasa interno zove action_extract_slots i pokušava popuniti slotove.
-    Ova akcija briše slučajno popunjene rezervacijske slotove kad nismo u rezervaciji.
-    """
 
     def name(self) -> Text:
         return "action_extract_slots"
@@ -386,26 +382,6 @@ class ActionSaveReservation(Action):
         return []
 
 
-class ActionPrepareSummary(Action):
-    def name(self) -> Text:
-        return "action_prepare_summary"
-
-    def run(self, dispatcher, tracker, domain):
-        events: List[Dict[Text, Any]] = []
-
-        termin = tracker.get_slot("termin") or ""
-        if " i " in termin:
-            termin = termin.replace(" i ", " u ")
-            events.append(SlotSet("termin", termin))
-
-        slots_to_check = ["napomena", "paket", "termin", "tip_usluge", "ime_prezime", "email"]
-        for slot in slots_to_check:
-            val = tracker.get_slot(slot)
-            if not val:
-                events.append(SlotSet(slot, "/"))
-
-        return events
-
 
 class ActionResetSlots(Action):
     def name(self) -> Text:
@@ -426,9 +402,10 @@ class ActionSetImePrezime(Action):
         text = (tracker.get_slot("ime_prezime_input") or "").strip()
 
         if len(text.split()) < 2:
-            dispatcher.utter_message(text="Molim upišite ime i prezime (npr. Lovro Turnić).")
-            return [SlotSet("ime_prezime_input", None)]
-
+            return [
+                SlotSet("ime_prezime_input", None),
+                SlotSet("ime_prezime", None), 
+            ]
         return [SlotSet("ime_prezime", text), SlotSet("ime_prezime_input", None)]
 
 
@@ -447,7 +424,7 @@ class ActionSetNapomena(Action):
 
 
 TERM_SAT_RE = re.compile(r"^\s*\d{1,2}\.\d{1,2}\.?\s*u\s*\d{1,2}(:\d{2})?\s*$")
-
+TERM_SAT_RE = re.compile(r"^\s*\d{1,2}\.\d{1,2}\.?\s*u\s*\d{1,2}(:\d{2})?\s*$")
 
 class ActionSetTermin(Action):
     def name(self) -> Text:
@@ -457,10 +434,29 @@ class ActionSetTermin(Action):
         raw = (tracker.get_slot("termin_input") or "").strip()
 
         if not TERM_SAT_RE.match(raw):
-            dispatcher.utter_message(text="Molim unesite u formatu: 2.2. u 11 ili 2.2. u 11:30.")
-            return [SlotSet("termin_input", None)]
+            return [SlotSet("termin_input", None), SlotSet("termin", None)]
 
         return [SlotSet("termin", raw), SlotSet("termin_input", None)]
+
+
+TERM_DATE_RE = re.compile(r"^\s*\d{1,2}\.\d{1,2}\.(\d{4})?\s*$")
+TERM_REL_RE = re.compile(r"^\s*(danas|sutra|preksutra)\s*$", re.IGNORECASE)
+
+class ActionValidateTerminGeneral(Action):
+    def name(self) -> Text:
+        return "action_validate_termin_general"
+
+    def run(self, dispatcher, tracker, domain):
+        raw = (tracker.get_slot("termin") or "").strip()
+
+        if TERM_DATE_RE.match(raw):
+            return []
+
+        if TERM_REL_RE.match(raw):
+            return []
+
+
+        return [SlotSet("termin", None)]
 
 
 class ActionRouteTermin(Action):
@@ -501,12 +497,7 @@ class ActionSetInReservationFalse(Action):
 CACHE_PATH = os.path.join(os.path.dirname(__file__), "faiss_cache.pkl")
 
 TOP_K = 10
-
-# stari pragovi (faiss-only) ti više nisu ključni; zadržavamo za fallback logiku
-MIN_SCORE = 0.35
 MIN_MARGIN = 0.02
-
-# novi prag za rerank
 MIN_FINAL_SCORE = 0.35
 
 MAX_CHARS = 900
@@ -528,25 +519,6 @@ def load_store():
     return _store, _model
 
 
-def _faiss_best_id(scores, ids) -> int | None:
-    """
-    Legacy: ostavljeno radi kompatibilnosti, ali više ne koristimo kao glavni odabir.
-    """
-    if ids is None or len(ids) == 0 or len(ids[0]) == 0:
-        return None
-    if ids[0][0] == -1:
-        return None
-
-    best = float(scores[0][0])
-    second = float(scores[0][1]) if len(ids[0]) > 1 and ids[0][1] != -1 else -1.0
-
-    if best < MIN_SCORE:
-        return None
-
-    if second > -1.0 and (best - second) < MIN_MARGIN:
-        return None
-
-    return int(ids[0][0])
 
 
 def _pick_best_with_rerank(
@@ -594,47 +566,6 @@ def _pick_best_with_rerank(
     return int(best_idx), float(best_final)
 
 
-class ActionAnswerFromKB(Action):
-    def name(self) -> str:
-        return "action_answer_from_kb"
-
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: dict):
-        user_q = (tracker.latest_message.get("text") or "").strip()
-        if not user_q:
-            dispatcher.utter_message(response="utter_kb_fallback")
-            return []
-
-        try:
-            store, model = load_store()
-        except Exception:
-            dispatcher.utter_message(text="Trenutno ne mogu pristupiti bazi znanja. Pokušajte kasnije.")
-            return []
-
-        index = store["index"]
-        chunks = store["chunks"]
-        meta = store["meta"]
-
-        q_emb = model.encode([user_q], convert_to_numpy=True, normalize_embeddings=True)
-        q_emb = np.asarray(q_emb, dtype="float32")
-
-        scores, ids = index.search(q_emb, TOP_K)
-
-        # rerank izbor (umjesto top1)
-        best_idx, best_final = _pick_best_with_rerank(user_q, scores, ids, meta, chunks, dispatcher=dispatcher)
-        if best_idx is None:
-            dispatcher.utter_message(response="utter_kb_fallback")
-            return []
-
-        url = meta[best_idx][0]
-        text = clean_kb_text((chunks[best_idx] or "").strip())
-
-        if len(text) > MAX_CHARS:
-            text = text[:MAX_CHARS].rsplit(" ", 1)[0] + "..."
-
-        dispatcher.utter_message(text=f"{text}\n\nIzvor: {url}")
-        return []
-
-
 # -----------------------------------------------------------------------------
 # 5) FAQ JSON + router (FAQ -> KB fallback)
 # -----------------------------------------------------------------------------
@@ -644,7 +575,6 @@ from pathlib import Path
 FAQ_PATH = Path("/workspaces/codespaces-quickstart/source/data/knowledge/IDA_Knowledge_Base.json")
 FAQ_CACHE_PATH = Path(__file__).resolve().parent / "faq_cache.pkl"
 
-FAQ_TOP_K = 3
 FAQ_MIN_SCORE = 0.55
 FAQ_MAX_CHARS = 1200
 
@@ -713,11 +643,6 @@ def search_faq(user_q: str, model: SentenceTransformer):
 
 
 class ActionAnswer(Action):
-    """
-    Router:
-    1) FAQ (json) -> ako score dovoljno dobar
-    2) inače KB (FAISS) fallback, ali s rerank (title/h1/path boost)
-    """
 
     def name(self) -> Text:
         return "action_answer"
@@ -728,7 +653,6 @@ class ActionAnswer(Action):
             dispatcher.utter_message(response="utter_kb_fallback")
             return []
 
-        # učitaj KB store+model
         try:
             kb_store, model = load_store()
         except Exception:

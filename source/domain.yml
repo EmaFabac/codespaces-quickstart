@@ -458,6 +458,8 @@ actions:
   - action_set_in_reservation_true
   - action_set_in_reservation_false
   - action_answer
+  - action_validate_termin_general
+
 
 
 
